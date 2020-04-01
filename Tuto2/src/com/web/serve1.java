@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dao.ProduitDao;
+import com.model.Produit;
 
 /**
  * Servlet implementation class serve1
@@ -49,13 +50,22 @@ public class serve1 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		String desg=request.getParameter("desg");
 		String desc=request.getParameter("desc");
 		int qte= Integer.parseInt(request.getParameter("qte"));
 		double prix =Double.parseDouble(request.getParameter("prix"));
 		
-		pm.addProduit(desg, prix, qte, desc);
+		if(request.getParameter("action").equalsIgnoreCase("Ajouter"))
+		{
+				pm.addProduit(desg, prix, qte, desc);
+		}else
+			if(request.getParameter("action").equalsIgnoreCase("modifier"))
+			{
+				int id= Integer.parseInt(request.getParameter("id"));
+				Produit p=new Produit(desg, prix, qte, desc);
+				pm.updateproduit(id, p);
+			}
+			
 		response.sendRedirect("Produit");
 	}
 

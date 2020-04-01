@@ -18,4 +18,5 @@ public interface IProduit {
 	public Produit findProduitById(int id);
 	public int deleteproduit(int id);
 	public List<Produit> allproduit();
+	public int updateproduit(int id, Produit p);
 }

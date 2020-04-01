@@ -79,4 +79,12 @@ public class ProduitDao implements IProduit{
 		return produits;
 	}
 
+	@Override
+	public int updateproduit(int id, Produit p) {
+		DBInteraction.connect();
+		int nb=DBInteraction.Maj("update produit set desg='"+p.getDesignation()+"', prix="+p.getPrix()+", qte="+p.getQuantite()+", description='"+p.getDescrition()+"' where id="+id);
+		DBInteraction.disconnect();
+		return nb;
+	}
+
 }
